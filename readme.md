@@ -6,11 +6,28 @@ For easier prototyping, the single HTML web page that boots the Vue application 
 
 The awesome [Bulma CSS Flex framework](https://bulma.io/) is a pretty straight-forward choice for this setup.
 
+Any serious app uses **vue-router** for displaying various pages (components) and **axios** for consuming API, so you'll find them included.
+
+A cool API will be language independent, so we modified the validation rule messages and we'll be processing them in the front-end.
+For this to work, we are using the **vue-i18n** package, which greatly alleviates the I18N pains and integrates pretty easily.
+
+Of course, even if it's not explicitly used in the scaffolding, the **moment** library is a must-have.
+
+Everything is packed and ready to go with **laravel-mix**.
+
+> **Warning**: this package is not intended for the absolute beginner.
+> You need to have some basic understanding of Lumen, what is JSON, how
+> Vue works, how a Promise work and some other things. **Also**,
+> it is not production-ready yet, although trusting JWT encryption
+> is a pretty safe bet, but there are no tests as of now.
+
 ## Features out of the box:
 
  - Authentication
- - Cors
+ - Registration
+ - Cors (not enabled by default)
  - JSON Error handler
+ - Internationalization
 
 ## Lumen (API Backend)
 Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
