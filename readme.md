@@ -4,6 +4,8 @@ This project is to be used for consuming an JSON API produced by Lumen Endpoints
 
 For easier prototyping, the single HTML web page that boots the Vue application is also served by the Lumen framework, but this can be easily moved to an independent project.
 
+The awesome [Bulma CSS Flex framework](https://bulma.io/) is a pretty straight-forward choice for this setup.
+
 ## Features out of the box:
 
  - Authentication

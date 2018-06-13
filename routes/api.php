@@ -14,3 +14,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->post('/login', 'AuthController@login');
+$router->post('/register', 'AuthController@register');
+
+$router->group([
+    'middleware' => 'auth',
+], function ($router) {
+    $router->get('/profile', 'ProfileController@show');
+    $router->put('/profile', 'ProfileController@update');
+});

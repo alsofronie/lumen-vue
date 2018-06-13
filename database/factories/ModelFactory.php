@@ -11,9 +11,14 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
+    static $password = null;
+    if (!$password) {
+        $password = app('hash')->make('secret');
+    }
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'password' => $password,
     ];
 });

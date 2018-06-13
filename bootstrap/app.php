@@ -25,7 +25,8 @@ $app = new Laravel\Lumen\Application(
 
 // $app->withFacades();
 
-// $app->withEloquent();
+// Eloquent is too awesome to let it rot in the vendor directory
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +64,10 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'cors' => App\Http\Middleware\Cors::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -78,9 +80,17 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+
+/*
+ * Just serve the front-end Vue application file
+ */
+
+$app->router->get('/', function () {
+    return view('app');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -91,12 +101,17 @@ $app->singleton(
 | the application. This will provide all of the URLs the application
 | can respond to, as well as the controllers that may handle them.
 |
+| The api.php file is just for the API so it would seem appropriately
+| to prefix it with '/api'
+|
 */
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
+    'prefix' => 'api',
+    // 'middleware' => ['cors'], // Enable this if you need it
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/api.php';
 });
 
 return $app;
